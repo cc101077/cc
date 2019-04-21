@@ -3,16 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <title>博客</title>
+    <link rel="shortcut icon" href="imgs/ico/bitbug.ico">
+    <style>
+        body{
+              margin:0; padding:0;
+        }
+
+        p{
+            line-height: 54px;
+            margin:0; padding:0;
+        }
+        .div_01{
+            /*width: 59px;*/
+            height: 59px;
+        }
+        .div_imgs_01{
+            height: 350px;
+            width: 100%;
+        }
+        #p_01{
+            color: darkmagenta;
+        }
+
+    </style>
+
 </head>
 <body>
     <div>
-        <div>
-            <img src="imgs/20080226_e83b7e46ad340caaa978CTiOp9HHGPL3.jpg"height="300" width="100%">
-            <h2 style="text-align:center; color: green;">CC101077的个人博客</h2>
+        <div class="div_01" style="position:relative;float:left">
+            <p style="text-align:left; color: green; font-size: 20px"; >CC101077的个人博客</p>
         </div>
-    <div>
-        <embed src="music/思念是一种病 - 张震岳,蔡健雅.mp3" hidden="true" autostart="true" loop="true">
+        <div style="position:relative;float:right">
+            <audio id="audio_01" onended="MyMusic()" src="" controls="controls" autoplay="autoplay"></audio>
+        </div>
+        <div style="position:relative;float:right; margin-right: 30px" >
+            <p id="p_01">
+                123
+            </p>
+        </div>
+        <div class="div_imgs_01">
+            <img src="imgs/20080226_e83b7e46ad340caaa978CTiOp9HHGPL3.jpg"height="350px" width="100%">
+        </div>
+        <div>
+            <img src="imgs/00232_400957640.jpg" height="600" width="100%">
+        </div>
+
     </div>
-    </div>
+    <script>
+
+        //歌曲循环
+        var img_list = new Array("思念是一种病 - 张震岳,蔡健雅.mp3",
+                                 "皇后大道东 - 蒋志光,罗大佑.mp3",
+                                 "周杰伦 - 告白气球.mp3",
+                                 "周杰伦 - 皮影戏.mp3",
+                                 "周杰伦+-+给我一首歌的时间.wav",
+                                 "周杰伦 - 发如雪.wav",
+                                 "周杰伦 - 黑色毛衣.mp3",
+                                 "周杰伦 - Mine Mine.mp3");
+        var img_length = img_list.length;
+        var img_idx = Math.floor(Math.random() * img_length );
+           // alert("下首歌曲："+img_list[img_idx]);
+        window.onload = function () {
+            // alert(Math.floor(Math.random() * 3));
+            document.getElementById("audio_01").src="music/"+img_list[img_idx];
+            document.getElementById("p_01").innerText="歌名："+img_list[img_idx];
+        }
+        function MyMusic() {
+            
+            function next_img() {
+                img_idx = Math.floor(Math.random() * img_length );
+                // document.getElementById("p_01").
+                alert("下首歌曲："+img_list[img_idx]); 
+                return img_list[img_idx];
+            }
+            document.getElementById("audio_01").src="music/"+next_img();
+
+        }
+    </script>
+
 </body>
 </html>
