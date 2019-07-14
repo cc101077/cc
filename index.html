@@ -83,7 +83,7 @@
     let on_length = on_music.length;
 
     window.onload = function () {
-        console.log(" 初始加载完毕")
+        // console.log(" 初始加载完毕")
         on_music.push(img_idx);
         document.getElementById("audio_01").src="music/"+img_list[img_idx];
         document.getElementById("p_01").innerHTML="歌名："+img_list[img_idx];
@@ -104,15 +104,15 @@
     //上一曲
     function Previous(){
         //如果播放顺序数为零 就随机下一首
-        alert(on_length-idexs);
+        // alert(on_length-idexs);
         if(on_length-idexs <= 0){
             MyMusic();
-            console.log("123");
+            // console.log("123");
             return;
         }
 
-        console.log(on_music.toString()+" <----> "+idexs);
-        console.log(img_list[on_music[on_length-1]]+" 歌曲 <<<<-----"+img_list[on_music[on_length-idexs]]+" 歌名")
+        // console.log(on_music.toString()+" <----> "+idexs);
+        // console.log(img_list[on_music[on_length-1]]+" 歌曲 <<<<-----"+img_list[on_music[on_length-idexs]]+" 歌名")
         document.getElementById("audio_01").src="music/"+img_list[on_img()];
         document.getElementById("p_01").innerHTML="歌名："+img_list[on_img()];
     }
