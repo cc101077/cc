@@ -31,14 +31,16 @@
 <body>
 <div>
     <div class="div_01" style="position:relative;float:left">
-        <p style="text-align:left; color: green; font-size: 20px ;margin-left: 15px">网站主页</p>
+        <p style="text-align:left; color: green; font-size: 20px ;margin-left: 15px">Music Wab Page</p>
     </div>
     <div style="position:relative;float:right">
         <input type="button" value="下一首" onclick="MyMusic()"/>
+        <input type="button" value="上一首" onclick="Previous()"/>
     </div>
 
     <div style="position:relative;float:right">
         <audio id="audio_01" onended="MyMusic()" src="" controls="controls" autoplay="autoplay"></audio>
+<!--        preload="preload"-->
     </div>
     <div style="position:relative;float:right; margin-right: 30px" >
         <p id="p_01">
@@ -48,18 +50,19 @@
     <!--<div class="div_imgs_01">-->
     <!--<img src="imgs/bare-tree-birds-dawn-2138922.jpg"height="350px" width="100%">-->
     <!--</div>-->
-    <div>
-        <img src="imgs/clouds-cloudscape-dawn-2138921.jpg" height="750" width="100%">
-    </div>
-    <div>
-        <a href="html/Homepage.html" rel="noopener noreferrer">主页</a>
-    </div>
+<!--    <div>-->
+<!--        <img src="imgs/clouds-cloudscape-dawn-2138921.jpg" height="750" width="100%">-->
+<!--    </div>-->
+<!--    <div>-->
+<!--        <a href="html/Homepage.html" rel="noopener noreferrer">主页</a>-->
+<!--    </div>-->
 
 </div>
 <script>
 
     //歌曲循环
-    var img_list = new Array("huanghoudadaodong--jiang,luo.mp3",
+    const img_list = new Array(
+        "huanghoudadaodong--jiang,luo.mp3",
         "sinianshiyizhongbing--zhang,cai.mp3",
         "zhoujielun--faruxue.mp3",
         "zhoujielun--gaobaiqiqiu.mp3",
@@ -67,25 +70,55 @@
         "zhoujielun--heisemaoyi.mp3",
         "zhoujielun--jiandanai.mp3",
         "zhoujielun--MineMine.mp3",
-        "zhoujielun--piyingxi.mp3");
-    var img_length = img_list.length;
-    var img_idx = Math.floor(Math.random() * img_length );
-    // alert("下首歌曲："+img_list[img_idx]);
+        "zhoujielun--piyingxi.mp3"
+    );
+    //歌曲数
+    const img_length = img_list.length;
+    //随机下一曲
+    let img_idx = Math.floor(Math.random() * img_length);
+    let on_music = new Array();
+    //上一首连续点击次数
+    let idexs = 0;
+    // 歌曲播放顺序
+    let on_length = on_music.length;
+
     window.onload = function () {
-        // alert(Math.floor(Math.random() * 3));
+        console.log(" 初始加载完毕")
+        on_music.push(img_idx);
         document.getElementById("audio_01").src="music/"+img_list[img_idx];
         document.getElementById("p_01").innerHTML="歌名："+img_list[img_idx];
     }
+    //下一曲
     function MyMusic() {
-
-        function next_img() {
-            img_idx = Math.floor(Math.random() * img_length );
-            // document.getElementById("p_01").
-            // alert("下首歌曲："+img_list[img_idx]);
-            return img_list[img_idx];
-        }
+        on_music.push(img_idx);
         document.getElementById("audio_01").src="music/"+next_img();
+        // console.log(" 下一首： "+next_img())
         document.getElementById("p_01").innerHTML="歌名："+img_list[img_idx];
+    }
+    function next_img() {
+        img_idx = Math.floor(Math.random() * img_length );
+        on_length = on_music.length;
+        idexs=0;
+        return img_list[img_idx];
+    }
+    //上一曲
+    function Previous(){
+        //如果播放顺序数为零 就随机下一首
+        alert(on_length-idexs);
+        if(on_length-idexs <= 0){
+            MyMusic();
+            console.log("123");
+            return;
+        }
+
+        console.log(on_music.toString()+" <----> "+idexs);
+        console.log(img_list[on_music[on_length-1]]+" 歌曲 <<<<-----"+img_list[on_music[on_length-idexs]]+" 歌名")
+        document.getElementById("audio_01").src="music/"+img_list[on_img()];
+        document.getElementById("p_01").innerHTML="歌名："+img_list[on_img()];
+    }
+    function on_img() {
+        idexs++;
+        return on_music[on_length-idexs];
     }
 </script>
 
